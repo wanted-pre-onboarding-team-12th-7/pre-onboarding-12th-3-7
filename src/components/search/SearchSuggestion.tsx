@@ -1,28 +1,13 @@
-import { useEffect, useState } from 'react'
-
 import { SearchSuggestionProps } from './type'
-import { SickObj, suggestionAPI } from '../../apis/suggestion'
+import { SickObj } from '../../apis/suggestion'
 import useDebounce from '../../hooks/useDebounce'
+import useSuggestions from '../../hooks/useSuggestions'
 
 function SearchSuggestion({ keyword }: SearchSuggestionProps) {
-  const [suggestions, setSuggestions] = useState<SickObj[]>([])
-
   const DEBOUNCE_DELAY = 500
 
   const debouncedValue = useDebounce(keyword, DEBOUNCE_DELAY)
-
-  useEffect(() => {
-    if (debouncedValue !== '') {
-      suggestionAPI
-        .get(debouncedValue)
-        .then((res) => {
-          setSuggestions(res.data)
-        })
-        .catch((err) => console.error(err))
-    } else {
-      setSuggestions([])
-    }
-  }, [debouncedValue])
+  const suggestions = useSuggestions(debouncedValue)
 
   return (
     <aside>
