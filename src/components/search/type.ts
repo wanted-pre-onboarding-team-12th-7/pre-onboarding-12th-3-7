@@ -1,8 +1,8 @@
-export interface SearchSuggestionType {
+export interface SearchSuggestionProps {
   keyword: string
 }
 
-export interface SearchFormType {
+export interface SearchFormProps {
   getInput: (vlaue: string) => void
   keyword: string
 }

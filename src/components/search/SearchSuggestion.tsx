@@ -1,6 +1,6 @@
-import { SearchSuggestionType } from './type'
+import { SearchSuggestionProps } from './type'
 
-function SearchSuggestion({ keyword }: SearchSuggestionType) {
+function SearchSuggestion({ keyword }: SearchSuggestionProps) {
   return (
     <aside>
       <p>{keyword}</p>
