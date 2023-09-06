@@ -6,11 +6,7 @@ interface SearchFormType {
 function SearchForm(props: SearchFormType) {
   return (
     <form>
-      <input
-        type="text"
-        value={props.keyword}
-        onInput={(e) => props.getInput((e.target as HTMLTextAreaElement).value)}
-      />
+      <input type="text" value={props.keyword} onChange={(e) => props.getInput(e.target.value)} />
       <button type="button">검색하기</button>
     </form>
   )
