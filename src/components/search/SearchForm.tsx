@@ -1,12 +1,9 @@
-interface SearchFormType {
-  getInput: (vlaue: string) => void
-  keyword: string
-}
+import { SearchFormType } from './type'
 
-function SearchForm(props: SearchFormType) {
+function SearchForm({ getInput, keyword }: SearchFormType) {
   return (
     <form>
-      <input type="text" value={props.keyword} onChange={(e) => props.getInput(e.target.value)} />
+      <input type="text" value={keyword} onChange={(e) => getInput(e.target.value)} />
       <button type="button">검색하기</button>
     </form>
   )
