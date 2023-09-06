@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import NotFoundPage from './NotFoundPage'
 import MainPage from './MainPage'
+import NotFoundPage from './NotFoundPage'
 
 function Router() {
   return (
