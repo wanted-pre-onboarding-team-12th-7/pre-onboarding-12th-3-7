@@ -1,6 +1,6 @@
 # 프리온보딩 7팀 Search Clinical Trial
 
-![logo](https://github.com/wanted-pre-onboarding-team-12th-7/pre-onboarding-12th-2-7/assets/93248349/7ccac592-cabe-4652-8df8-53ee7b7814b1)
+![logo](https://github.com/wanted-pre-onboarding-team-12th-7/pre-onboarding-12th-3-7/assets/52682692/8c1d916a-2d12-41ee-9f2d-bced871a7d97)
 
 7팀의 협업은 이렇게 진행되고 있어요! [궁금하다면 클릭!](https://www.notion.so/sonicrok/7-5fcce41bb3594680b16862082dd0324d)
 
