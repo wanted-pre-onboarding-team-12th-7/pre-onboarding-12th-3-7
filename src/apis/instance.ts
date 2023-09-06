@@ -6,7 +6,7 @@ const axiosInstance = axios.create({ baseURL: BASE_URL })
 
 axiosInstance.interceptors.request.use((config) => {
   /** @description API 호출될 때마다 console.info 출력*/
-  console.info('API CALL to ', config.url, config.params)
+  console.info('calling api')
   return config
 })
 
