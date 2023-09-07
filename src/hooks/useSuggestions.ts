@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react'
 
 import { SickObj, suggestionAPI } from '../apis/suggestion'
 
-const useSuggestions = (debouncedValue: string) => {
+const useSuggestions = (keyword: string) => {
   const [suggestions, setSuggestions] = useState<SickObj[]>([])
 
   useEffect(() => {
-    if (debouncedValue !== '') {
+    if (keyword !== '') {
       suggestionAPI
-        .get(debouncedValue)
+        .get(keyword)
         .then((res) => {
           setSuggestions(res.data)
         })
@@ -16,7 +16,7 @@ const useSuggestions = (debouncedValue: string) => {
     } else {
       setSuggestions([])
     }
-  }, [debouncedValue])
+  }, [keyword])
 
   return suggestions
 }
