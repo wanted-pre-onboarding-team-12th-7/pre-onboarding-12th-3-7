@@ -3,9 +3,9 @@ import { SickObj } from '../../apis/suggestion'
 import useDebounce from '../../hooks/useDebounce'
 import useSuggestions from '../../hooks/useSuggestions'
 
-function SearchSuggestion({ keyword }: SearchSuggestionProps) {
-  const DEBOUNCE_DELAY = 500
+const DEBOUNCE_DELAY = 500
 
+function SearchSuggestion({ keyword }: SearchSuggestionProps) {
   const debouncedValue = useDebounce(keyword, DEBOUNCE_DELAY)
   const suggestions = useSuggestions(debouncedValue)
 
