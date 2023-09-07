@@ -15,4 +15,5 @@ export interface SearchFormProps {
     (e: React.KeyboardEvent): void
     setIndex(idx: number): void
   }
+  isOpen: boolean
 }
