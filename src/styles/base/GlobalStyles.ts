@@ -33,6 +33,8 @@ ${reset},
         color: inherit;
         font-size: inherit;
         border: 0;
+        outline: 0;
+        background-color: transparent;
     }
     button:focus, 
     input:focus, 

@@ -1,48 +1,75 @@
 import { SearchSuggestionProps } from './type'
 import { SickObj } from '../../apis/suggestion'
+import { ReactComponent as PlaceholderSearchIcon } from '../../styles/svg/placeholderSearchIcon.svg'
+
+import * as S from './SearchSuggestion.styled'
 
 function SearchSuggestion({
-  keyword,
   selectIndex,
   suggestions,
   loading,
   error,
+  keyword,
 }: SearchSuggestionProps) {
   return (
-    <>
+    <S.Wrapper>
       {loading ? (
-        <p>Loading</p>
+        <S.SearchMainText>검색 중 ...</S.SearchMainText>
       ) : error ? (
-        <p>ERROR!!!</p>
+        <S.SearchMainText>검색 에러 발생, 문의 부탁드립니다.</S.SearchMainText>
       ) : (
-        <aside>
-          <p>{keyword}</p>
-
-          <div>
-            <h3>추천 검색어</h3>
+        <>
+          <S.SearchRecentBox>
             {suggestions.length === 0 ? (
-              <div>추천 검색어가 없습니다.</div>
+              <>
+                <S.SearchMainText>최근 검색어</S.SearchMainText>
+                <div>최근 검색어가 없습니다</div>
+              </>
             ) : (
-              <ul>
+              <S.SearchRecentItemList>
+                <S.SearchRecentItem key={keyword} selectIndex={selectIndex === 0}>
+                  <S.SearchRecentItemButton type="button">
+                    <S.SearchImgBox>
+                      <PlaceholderSearchIcon />
+                    </S.SearchImgBox>
+                    <S.SearchRecentText>{keyword}</S.SearchRecentText>
+                  </S.SearchRecentItemButton>
+                </S.SearchRecentItem>
+                <S.SearchMainText>추천 검색어</S.SearchMainText>
                 {suggestions.map((suggestion: SickObj, index) => {
                   return (
-                    <li key={suggestion.sickCd}>
-                      <button
-                        // FIXME: select 테스트를 위한 스타일입니다. 스타일 작업시 제거해주세요.
-                        style={selectIndex === index ? { background: 'red' } : {}}
-                        type="button"
-                      >
-                        {suggestion.sickNm}
-                      </button>
-                    </li>
+                    <S.SearchRecentItem
+                      key={suggestion.sickCd}
+                      selectIndex={selectIndex === index + 1}
+                    >
+                      <S.SearchRecentItemButton type="button">
+                        <S.SearchImgBox>
+                          <PlaceholderSearchIcon />
+                        </S.SearchImgBox>
+                        <S.SearchRecentText>{suggestion.sickNm}</S.SearchRecentText>
+                      </S.SearchRecentItemButton>
+                    </S.SearchRecentItem>
                   )
                 })}
-              </ul>
+              </S.SearchRecentItemList>
             )}
-          </div>
-        </aside>
+          </S.SearchRecentBox>
+          {suggestions.length === 0 && (
+            <>
+              <S.DivideLine />
+              <S.SearchMainText>추천 검색어로 검색해보세요</S.SearchMainText>
+              <S.SearchSuggestionBox>
+                <S.SearchSuggestionItem>B형간염</S.SearchSuggestionItem>
+                <S.SearchSuggestionItem>비만</S.SearchSuggestionItem>
+                <S.SearchSuggestionItem>관절염</S.SearchSuggestionItem>
+                <S.SearchSuggestionItem>우울증</S.SearchSuggestionItem>
+                <S.SearchSuggestionItem>식도염</S.SearchSuggestionItem>
+              </S.SearchSuggestionBox>
+            </>
+          )}
+        </>
       )}
-    </>
+    </S.Wrapper>
   )
 }
 

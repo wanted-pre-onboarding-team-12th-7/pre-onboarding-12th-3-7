@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 const useKeyboardNavigation = <T>(dataArr: T[]) => {
   const [currentIndex, setCurrentIndex] = useState(-1)
 
-  const endIndex = dataArr.length - 1
+  const endIndex = dataArr.length
   const isEndIndex = currentIndex === endIndex
 
   const moveToPrev = (e: React.KeyboardEvent) => {
