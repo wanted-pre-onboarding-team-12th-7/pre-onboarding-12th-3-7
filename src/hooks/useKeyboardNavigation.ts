@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const useKeyboardNavigation = <T>(dataArr: T[]) => {
   const [currentIndex, setCurrentIndex] = useState(-1)
@@ -39,6 +39,10 @@ const useKeyboardNavigation = <T>(dataArr: T[]) => {
   changeIndexByKeyDown.setIndex = (idx: number) => {
     setCurrentIndex(idx)
   }
+
+  useEffect(() => {
+    changeIndexByKeyDown.setIndex(0)
+  }, [dataArr])
 
   return { currentIndex, changeIndexByKeyDown }
 }
