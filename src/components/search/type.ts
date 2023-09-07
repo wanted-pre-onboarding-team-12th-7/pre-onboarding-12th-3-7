@@ -11,6 +11,8 @@ export interface SearchSuggestionProps {
 export interface SearchFormProps {
   getInput: (vlaue: string) => void
   keyword: string
-  openSuggestion: () => void
-  navigateFocus: (e: React.KeyboardEvent) => void
+  changeIndexByKeyDown: {
+    (e: React.KeyboardEvent): void
+    setIndex(idx: number): void
+  }
 }

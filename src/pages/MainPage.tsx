@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 
 import SearchForm from '../components/search/SearchForm'
 import SearchSuggestion from '../components/search/SearchSuggestion'
@@ -10,66 +10,39 @@ const DEBOUNCE_DELAY = 500
 
 export default function MainPage() {
   const [keyword, setKeyword] = useState<string>('')
-  const [isSuggestionOpen, setIsSuggestionOpen] = useState(false)
-  const searchRef = useRef<HTMLDivElement>(null)
   const debouncedValue = useDebounce(keyword, DEBOUNCE_DELAY)
   const { suggestions, loading, error } = useSuggestions(debouncedValue)
-  const { selectIndex, navigateFocus, selectedItem } = useKeyboardNavigation(
-    suggestions,
-    isSuggestionOpen,
-    setIsSuggestionOpen
-  )
+  const { currentIndex, changeIndexByKeyDown } = useKeyboardNavigation(suggestions)
+  const isOpen = currentIndex > -1
 
   const getInput = (value: string): void => {
     setKeyword(value)
   }
 
-  const openSuggestion = () => {
-    setIsSuggestionOpen(true)
-  }
-
-  useEffect(() => {
-    const handleOutsideClick = (e: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
-        setIsSuggestionOpen(false)
-      }
-    }
-    document.addEventListener('mousedown', handleOutsideClick)
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (selectedItem) {
-      setKeyword(selectedItem.sickNm)
-    }
-  }, [selectedItem])
-
   return (
-    <section ref={searchRef}>
+    <section>
       <h2>검색하기</h2>
       <p>
         국내 모든 임상시험 검색하고
         <br />
         온라인으로 참여하기
       </p>
-
-      <SearchForm
-        getInput={getInput}
-        keyword={keyword}
-        navigateFocus={navigateFocus}
-        openSuggestion={openSuggestion}
-      />
-      {isSuggestionOpen && (
-        <SearchSuggestion
-          error={error}
+      <div onKeyDown={changeIndexByKeyDown}>
+        <SearchForm
+          changeIndexByKeyDown={changeIndexByKeyDown}
+          getInput={getInput}
           keyword={keyword}
-          loading={loading}
-          selectIndex={selectIndex}
-          suggestions={suggestions}
         />
-      )}
+        {isOpen && (
+          <SearchSuggestion
+            error={error}
+            keyword={keyword}
+            loading={loading}
+            selectIndex={currentIndex}
+            suggestions={suggestions}
+          />
+        )}
+      </div>
     </section>
   )
 }

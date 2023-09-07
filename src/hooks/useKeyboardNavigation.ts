@@ -1,79 +1,46 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
-const useKeyboardNavigation = <T>(
-  resultArray: T[],
-  isResultOpen: boolean,
-  setIsResultOpen: React.Dispatch<React.SetStateAction<boolean>>
-) => {
-  const [selectIndex, setSelectIndex] = useState(-1)
-  const [selectedItem, setSelectedItem] = useState<T | null>(null)
+const useKeyboardNavigation = <T>(dataArr: T[]) => {
+  const [currentIndex, setCurrentIndex] = useState(-1)
 
-  const startIndex = 0
-  const endIndex = resultArray.length - 1
-  const isStartIndex = selectIndex === startIndex
-  const isEndIndex = selectIndex === endIndex
-
-  const openResult = () => {
-    setIsResultOpen(true)
-  }
-
-  const closeResult = () => {
-    setIsResultOpen(false)
-  }
+  const endIndex = dataArr.length - 1
+  const isEndIndex = currentIndex === endIndex
 
   const moveToPrev = (e: React.KeyboardEvent) => {
-    e.preventDefault()
-    if (isStartIndex) {
-      closeResult()
-    } else {
-      setSelectIndex((prev) => prev - 1)
+    if (currentIndex >= 0) {
+      e.preventDefault()
     }
+    setCurrentIndex((prev) => Math.max(prev - 1, -1))
   }
 
   const moveToNext = (e: React.KeyboardEvent) => {
-    if (isResultOpen) {
-      setSelectIndex((prev) => (prev < endIndex ? prev + 1 : prev))
-      if (e.key === 'Tab') {
-        if (isEndIndex) {
-          closeResult()
-        } else {
-          e.preventDefault()
-        }
-      }
-    }
-    if (!isResultOpen && e.key === 'ArrowDown') {
-      setSelectIndex(0)
-      openResult()
+    if (e.key === 'Tab' && isEndIndex) {
+      closeAndReset()
+    } else {
+      e.preventDefault()
+      setCurrentIndex((prev) => Math.min(prev + 1, endIndex))
     }
   }
 
   const closeAndReset = () => {
-    closeResult()
-    setSelectIndex(-1)
+    setCurrentIndex(-1)
   }
 
-  const selectCurrent = () => {
-    setSelectedItem(resultArray[selectIndex])
-  }
-
-  const navigateFocus = (e: React.KeyboardEvent) => {
+  const changeIndexByKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowUp' || (e.shiftKey && e.key === 'Tab')) {
       moveToPrev(e)
     } else if (e.key === 'ArrowDown' || e.key === 'Tab') {
       moveToNext(e)
     } else if (e.key === 'Escape') {
       closeAndReset()
-    } else if (e.key === 'Enter') {
-      selectCurrent()
     }
   }
 
-  useEffect(() => {
-    openResult()
-    setSelectIndex(-1)
-  }, [resultArray])
+  changeIndexByKeyDown.setIndex = (idx: number) => {
+    setCurrentIndex(idx)
+  }
 
-  return { selectIndex, navigateFocus, selectedItem }
+  return { currentIndex, changeIndexByKeyDown }
 }
 
 export default useKeyboardNavigation
