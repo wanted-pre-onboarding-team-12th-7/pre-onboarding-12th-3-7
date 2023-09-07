@@ -1,5 +1,3 @@
-import { styled } from 'styled-components'
-
 import { SearchSuggestionProps } from './type'
 import { SickObj } from '../../apis/suggestion'
 
