@@ -4,21 +4,26 @@ import { SickObj, suggestionAPI } from '../apis/suggestion'
 
 const useSuggestions = (keyword: string) => {
   const [suggestions, setSuggestions] = useState<SickObj[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<boolean>(false)
 
   useEffect(() => {
     if (keyword !== '') {
+      setLoading(true)
+
       suggestionAPI
         .get(keyword)
         .then((res) => {
           setSuggestions(res.data)
+          setLoading(false)
         })
-        .catch((err) => console.error(err))
+        .catch(() => setError(true))
     } else {
       setSuggestions([])
     }
   }, [keyword])
 
-  return suggestions
+  return { suggestions, loading, error }
 }
 
 export default useSuggestions
