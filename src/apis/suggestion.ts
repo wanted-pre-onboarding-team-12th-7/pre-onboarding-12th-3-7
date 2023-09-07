@@ -1,6 +1,6 @@
 import { instance } from './instance'
 
-export type SickObj = {
+export interface SickObj {
   sickCd: string
   sickNm: string
 }
