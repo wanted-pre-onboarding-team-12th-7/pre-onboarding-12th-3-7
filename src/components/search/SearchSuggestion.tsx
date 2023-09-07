@@ -1,14 +1,15 @@
+import { styled } from 'styled-components'
+
 import { SearchSuggestionProps } from './type'
 import { SickObj } from '../../apis/suggestion'
-import useDebounce from '../../hooks/useDebounce'
-import useSuggestions from '../../hooks/useSuggestions'
 
-const DEBOUNCE_DELAY = 500
-
-function SearchSuggestion({ keyword }: SearchSuggestionProps) {
-  const debouncedValue = useDebounce(keyword, DEBOUNCE_DELAY)
-  const { suggestions, loading, error } = useSuggestions(debouncedValue)
-
+function SearchSuggestion({
+  keyword,
+  selectIndex,
+  suggestions,
+  loading,
+  error,
+}: SearchSuggestionProps) {
   return (
     <>
       {loading ? (
@@ -25,10 +26,16 @@ function SearchSuggestion({ keyword }: SearchSuggestionProps) {
               <div>추천 검색어가 없습니다.</div>
             ) : (
               <ul>
-                {suggestions.map((suggestion: SickObj) => {
+                {suggestions.map((suggestion: SickObj, index) => {
                   return (
                     <li key={suggestion.sickCd}>
-                      <button type="button">{suggestion.sickNm}</button>
+                      <button
+                        // FIXME: select 테스트를 위한 스타일입니다. 스타일 작업시 제거해주세요.
+                        style={selectIndex === index ? { background: 'red' } : {}}
+                        type="button"
+                      >
+                        {suggestion.sickNm}
+                      </button>
                     </li>
                   )
                 })}
