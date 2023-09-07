@@ -15,9 +15,11 @@ const useSuggestions = (keyword: string) => {
         .get(keyword)
         .then((res) => {
           setSuggestions(res.data)
-          setLoading(false)
         })
         .catch(() => setError(true))
+        .finally(() => {
+          setLoading(false)
+        })
     } else {
       setSuggestions([])
     }
