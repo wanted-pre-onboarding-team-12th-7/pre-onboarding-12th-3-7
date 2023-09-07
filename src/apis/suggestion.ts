@@ -1,4 +1,5 @@
 import { instance } from './instance'
+import { CacheRepository } from '../store/CacheRepository'
 
 export interface SickObj {
   sickCd: string
@@ -7,8 +8,19 @@ export interface SickObj {
 
 export type GetSuggestionResponse = SickObj[]
 
-const getSuggestion = (searchTerm: string) => {
-  return instance.get<GetSuggestionResponse>('sick', { q: searchTerm })
+const cacheRepository = new CacheRepository<SickObj>()
+
+const getSuggestion = async (searchTerm: string) => {
+  const cache = cacheRepository.get(searchTerm)
+
+  if (cache && cache.expireTime > Date.now()) {
+    return cache.data
+  } else {
+    const { data } = await instance.get<GetSuggestionResponse>('sick', { q: searchTerm })
+    cacheRepository.set(searchTerm, data)
+
+    return data
+  }
 }
 
 export const suggestionAPI = { get: getSuggestion }
