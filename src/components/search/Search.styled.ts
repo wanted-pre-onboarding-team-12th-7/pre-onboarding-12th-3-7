@@ -104,7 +104,7 @@ export const SearchInputBox = styled.div`
 `
 
 export const PlaceholderAbsoluteBox = styled.div`
-  color: ${({ theme }) => theme.color.placeholderTextColor};
+  color: ${({ theme }) => theme.color.placeholderText};
   position: absolute;
   pointer-events: none;
   display: flex;
@@ -142,7 +142,7 @@ export const ClearImgBox = styled.div<{ isOpen: boolean }>`
   height: 20px;
   border-radius: 50%;
   color: ${({ theme }) => theme.color.white};
-  background-color: ${({ theme }) => theme.color.clearBgColor};
+  background-color: ${({ theme }) => theme.color.clearBg};
   cursor: pointer;
 `
 
@@ -169,7 +169,7 @@ export const SearchButton = styled.button`
   display: inline-flex;
   border: 0;
   cursor: pointer;
-  background-color: ${({ theme }) => theme.color.buttonBgColor};
+  background-color: ${({ theme }) => theme.color.buttonBg};
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;

@@ -18,7 +18,7 @@ function SearchForm({ getInput, keyword, changeIndexByKeyDown, isOpen }: SearchF
             inputRef.current?.focus()
           }}
         >
-          {!isOpen && (
+          {!isOpen && !keyword && (
             <S.PlaceholderAbsoluteBox>
               <S.PlaceholderImgBox>
                 <PlaceholderSearchIcon />
