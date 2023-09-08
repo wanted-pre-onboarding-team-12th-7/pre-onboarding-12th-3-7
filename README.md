@@ -154,13 +154,13 @@ useEffect(() => {
 
 ### 1-3. 검색창 컴포넌트 설계
 
-- 앞서 정의된 `useSuggestions` hook을 이용하여 ` suggestions, loading, error`세 상태의 결과값을 화면에 출력했습니다.
+- 앞서 정의된 `useSuggestions` hook을 이용하여 `suggestions, loading, error`세 상태의 결과값을 화면에 출력했습니다.
 
 ```
 const { suggestions, loading, error } = useSuggestions(debouncedValue)`
 ```
 
-- `loading / error` 여부에 따라 `loading / error message`를 출력해 주었습니다.
+- `loading / error` 여부에 따라 `loading / error message`를 출력해 주었습니다.
 
 - `suggestions.length === 0`의 참/거짓에 따라 `'최근 검색어 + 추천 검색어(default)' / '추천 검색어(suggestions)'`값을 출력해주었습니다.
 
