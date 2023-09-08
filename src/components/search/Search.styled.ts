@@ -10,6 +10,7 @@ export const SearchWrapper = styled.section`
   width: 100%;
   margin: auto;
   max-width: 1040px;
+  position: relative;
 `
 
 export const TitleText = styled.div`
@@ -188,4 +189,25 @@ export const SearchButton = styled.button`
 export const SearchButtonImgBox = styled.div`
   width: 21px;
   height: 21px;
+`
+
+export const LeftImageBox = styled.div`
+  left: 0;
+  top: 200px;
+  width: 148px;
+  position: absolute;
+`
+
+export const CenterImageBox = styled.div`
+  right: 124px;
+  top: 280px;
+  width: 130px;
+  position: absolute;
+`
+
+export const RightImageBox = styled.div`
+  right: 20px;
+  top: 188px;
+  width: 116px;
+  position: absolute;
 `

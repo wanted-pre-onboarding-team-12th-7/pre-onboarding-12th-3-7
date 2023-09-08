@@ -7,6 +7,7 @@ import useKeyboardNavigation from '../hooks/useKeyboardNavigation'
 import useSuggestions from '../hooks/useSuggestions'
 
 import * as S from '../components/search/Search.styled'
+import SearchSvgImages from '../components/search/SearchSvgImages'
 
 const DEBOUNCE_DELAY = 500
 
@@ -45,6 +46,8 @@ export default function MainPage() {
             />
           )}
         </S.SearchBox>
+
+        <SearchSvgImages />
       </S.SearchWrapper>
     </S.Wrapper>
   )
