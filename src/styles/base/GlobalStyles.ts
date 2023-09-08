@@ -2,7 +2,6 @@ import { createGlobalStyle } from 'styled-components'
 import { reset } from 'styled-reset'
 
 const GlobalStyle = createGlobalStyle`
-@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 ${reset},
     *,
     *::before,
@@ -15,10 +14,10 @@ ${reset},
         height: 100%;
         font-family: 'Spoqa Han Sans Neo', 'sans-serif';
         font-size: ${({ theme }) => theme.fontSize.default};
-        color: ${({ theme }) => theme.color.textColor};
+        color: ${({ theme }) => theme.color.basicText};
     }
     body {
-        background: ${({ theme }) => theme.color.bgColor};
+        background: ${({ theme }) => theme.color.mainBg};
     }
     a {
         color: inherit;
@@ -34,6 +33,8 @@ ${reset},
         color: inherit;
         font-size: inherit;
         border: 0;
+        outline: 0;
+        background-color: transparent;
     }
     button:focus, 
     input:focus, 

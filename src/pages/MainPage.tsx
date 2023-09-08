@@ -6,6 +6,8 @@ import useDebounce from '../hooks/useDebounce'
 import useKeyboardNavigation from '../hooks/useKeyboardNavigation'
 import useSuggestions from '../hooks/useSuggestions'
 
+import * as S from '../components/search/Search.styled'
+
 const DEBOUNCE_DELAY = 500
 
 export default function MainPage() {
@@ -18,31 +20,32 @@ export default function MainPage() {
   const getInput = (value: string): void => {
     setKeyword(value)
   }
-
   return (
-    <section>
-      <h2>검색하기</h2>
-      <p>
-        국내 모든 임상시험 검색하고
-        <br />
-        온라인으로 참여하기
-      </p>
-      <div onKeyDown={changeIndexByKeyDown}>
-        <SearchForm
-          changeIndexByKeyDown={changeIndexByKeyDown}
-          getInput={getInput}
-          keyword={keyword}
-        />
-        {isOpen && (
-          <SearchSuggestion
-            error={error}
+    <S.Wrapper>
+      <S.SearchWrapper>
+        <S.TitleText>
+          국내 모든 임상시험 검색하고
+          <br />
+          온라인으로 참여하기
+        </S.TitleText>
+        <S.SearchBox onKeyDown={changeIndexByKeyDown}>
+          <SearchForm
+            changeIndexByKeyDown={changeIndexByKeyDown}
+            getInput={getInput}
+            isOpen={isOpen}
             keyword={keyword}
-            loading={loading}
-            selectIndex={currentIndex}
-            suggestions={suggestions}
           />
-        )}
-      </div>
-    </section>
+          {isOpen && (
+            <SearchSuggestion
+              error={error}
+              keyword={keyword}
+              loading={loading}
+              selectIndex={currentIndex}
+              suggestions={suggestions}
+            />
+          )}
+        </S.SearchBox>
+      </S.SearchWrapper>
+    </S.Wrapper>
   )
 }

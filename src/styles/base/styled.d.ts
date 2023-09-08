@@ -1,7 +1,7 @@
 import 'styled-components'
 import { FontSizeType } from './../constants/fontSize'
-import { FlexType } from '../constants/flex'
 import { ColorType } from '../constants/color'
+import { FlexType } from '../constants/flex'
 
 declare module 'styled-components' {
   interface DefaultTheme extends ExtendedTheme {

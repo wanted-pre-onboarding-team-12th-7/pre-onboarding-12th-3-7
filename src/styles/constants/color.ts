@@ -1,16 +1,26 @@
 export interface ColorType {
-  textColor: string
+  basicText: string
+  placeholderText: string
   borderBottom: string
-  bgColor: string
+  mainBg: string
+  searchTitleText: string
+  keyboardBg: string
   blue: string
+  buttonBg: string
+  clearBg: string
   white: string
 }
 
 export const color: ColorType = {
-  textColor: '#000000',
-  borderBottom: '2px solid rgb(0, 123, 233)',
-  bgColor: 'rgb(240 248 254)',
-  blue: 'rgb(39 116 224)',
+  basicText: '#000000',
+  placeholderText: '#A7AFB7',
+  borderBottom: 'rgb(0, 123, 233)',
+  mainBg: '#CAE9FF',
+  searchTitleText: 'rgb(105, 112, 119)',
+  keyboardBg: 'rgb(248, 249, 250)',
+  blue: 'rgb(39, 116, 224)',
+  buttonBg: '#007BE9',
+  clearBg: 'rgb(167, 175, 183)',
   white: '#ffffff',
 }
 
