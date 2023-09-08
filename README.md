@@ -164,7 +164,7 @@ const { suggestions, loading, error } = useSuggestions(debouncedValue)`
 
 - `suggestions.length === 0`의 참/거짓에 따라 `'최근 검색어 + 추천 검색어(default)' / '추천 검색어(suggestions)'`값을 출력해주었습니다.
 
-```ts
+```tsx
 // src/components/search/SearchSuggestion.tsx
 
 {loading ? (
