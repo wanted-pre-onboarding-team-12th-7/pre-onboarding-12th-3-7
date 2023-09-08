@@ -1,6 +1,6 @@
 import { SearchSuggestionProps } from './type'
 import { SickObj } from '../../apis/suggestion'
-import { ReactComponent as PlaceholderSearchIcon } from '../../styles/svg/placeholderSearchIcon.svg'
+import { ReactComponent as PlaceholderSearchIcon } from '../../assets/svg/placeholderSearchIcon.svg'
 
 import * as S from './SearchSuggestion.styled'
 

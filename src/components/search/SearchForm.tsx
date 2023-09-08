@@ -1,9 +1,9 @@
 import { useRef } from 'react'
 
 import { SearchFormProps } from './type'
-import { ReactComponent as ButtonSearchIcon } from '../../styles/svg/buttonSearchIcon.svg'
-import { ReactComponent as ClearIcon } from '../../styles/svg/clearIcon.svg'
-import { ReactComponent as PlaceholderSearchIcon } from '../../styles/svg/placeholderSearchIcon.svg'
+import { ReactComponent as ButtonSearchIcon } from '../../assets/svg/buttonSearchIcon.svg'
+import { ReactComponent as ClearIcon } from '../../assets/svg/clearIcon.svg'
+import { ReactComponent as PlaceholderSearchIcon } from '../../assets/svg/placeholderSearchIcon.svg'
 
 import * as S from './Search.styled'
 
