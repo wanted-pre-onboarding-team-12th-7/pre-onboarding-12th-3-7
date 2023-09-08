@@ -26,10 +26,10 @@ export const SearchBox = styled.div`
   width: 100%;
 `
 
-export const SearchInnerBox = styled.div<{ isOpen: boolean }>`
+export const SearchInnerBox = styled.div<{ $isOpen: boolean }>`
   border-radius: 42px;
   border: 2px solid;
-  border-color: ${({ isOpen, theme }) => (isOpen ? theme.color.borderBottom : theme.color.white)};
+  border-color: ${({ $isOpen, theme }) => ($isOpen ? theme.color.borderBottom : theme.color.white)};
   background-color: ${({ theme }) => theme.color.white};
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
@@ -127,8 +127,8 @@ export const SearchInput = styled.input`
   outline-offset: -2px;
 `
 
-export const ClearImgBox = styled.div<{ isOpen: boolean }>`
-  opacity: ${({ isOpen }) => (isOpen ? 100 : 0)};
+export const ClearImgBox = styled.div<{ $isOpen: boolean }>`
+  opacity: ${({ $isOpen }) => ($isOpen ? 100 : 0)};
   position: absolute;
   display: flex;
   -webkit-box-align: center;

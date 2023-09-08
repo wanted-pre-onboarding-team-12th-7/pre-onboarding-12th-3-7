@@ -27,7 +27,7 @@ function SearchSuggestion({
               </>
             ) : (
               <S.SearchRecentItemList>
-                <S.SearchRecentItem key={keyword} selectIndex={selectIndex === 0}>
+                <S.SearchRecentItem key={keyword} $selectIndex={selectIndex === 0}>
                   <S.SearchRecentItemButton type="button">
                     <S.SearchImgBox>
                       <PlaceholderSearchIcon />
@@ -40,7 +40,7 @@ function SearchSuggestion({
                   return (
                     <S.SearchRecentItem
                       key={suggestion.sickCd}
-                      selectIndex={selectIndex === index + 1}
+                      $selectIndex={selectIndex === index + 1}
                     >
                       <S.SearchRecentItemButton type="button">
                         <S.SearchImgBox>

@@ -10,7 +10,7 @@ import * as S from './Search.styled'
 function SearchForm({ getInput, keyword, changeIndexByKeyDown, isOpen }: SearchFormProps) {
   const inputRef = useRef<HTMLInputElement>(null)
   return (
-    <S.SearchInnerBox isOpen={isOpen} onSubmit={(e) => e.preventDefault()}>
+    <S.SearchInnerBox $isOpen={isOpen} onSubmit={(e) => e.preventDefault()}>
       <S.SearchInputWrapper>
         <S.SearchInputWrapperFlex />
         <S.SearchInputBox
@@ -40,7 +40,7 @@ function SearchForm({ getInput, keyword, changeIndexByKeyDown, isOpen }: SearchF
             }}
           />
           <S.ClearImgBox
-            isOpen={isOpen}
+            $isOpen={isOpen}
             onClick={() => {
               getInput('')
             }}
