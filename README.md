@@ -157,7 +157,7 @@ useEffect(() => {
 - 앞서 정의된 `useSuggestions` hook을 이용하여 `suggestions, loading, error`세 상태의 결과값을 화면에 출력했습니다.
 
 ```
-const { suggestions, loading, error } = useSuggestions(debouncedValue)`
+const { suggestions, loading, error } = useSuggestions(debouncedValue)
 ```
 
 - `loading / error` 여부에 따라 `loading / error message`를 출력해 주었습니다.
