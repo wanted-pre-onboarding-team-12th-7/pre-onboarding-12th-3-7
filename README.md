@@ -93,16 +93,16 @@ npm start
 
 - 분리된 `useSuggestions` hook은 `keyword`를 주입할 수 있도록 제작했고 `useEffect`를 사용하여 keyword의 상태에 따라 return될 값들의 상태를 변경해 주었습니다.
 
-  ```
-  const useSuggestions = (keyword: string) => {
-    ...
-    useEffect(() => {
-      ...
-    }, [keyword])
+```ts
+const useSuggestions = (keyword: string) => {
+  ...
+  useEffect(() => {
+  ...
+  }, [keyword])
 
-    return { suggestions, loading, error }
-  }
-  ```
+  return { suggestions, loading, error }
+}
+```
 
 ### 1-2. useSuggestions 구현 방법
 
@@ -119,37 +119,37 @@ npm start
 - 저장 된 `cache data`가 있으면 `cache`에 저장된 data를 return 해주었습니다.
 - 저장 된 `cache data`가 없으면 `suggestionAPI`로 호출된 data를 return 해주었습니다.
 
-```
+```ts
 // src/hooks/useSuggestions.ts
 
-    const [loading, setLoading] = useState<boolean>(false)
-    const [error, setError] = useState<boolean>(false)
+const [loading, setLoading] = useState<boolean>(false)
+const [error, setError] = useState<boolean>(false)
 
-    useEffect(() => {
-      if (keyword !== '') {
-      setLoading(true)
+useEffect(() => {
+  if (keyword !== '') {
+  setLoading(true)
 
-      const cache = cacheRepository.get(keyword)
+  const cache = cacheRepository.get(keyword)
 
-      if (cache && cache.expireTime > Date.now()) {
-        setSuggestions(cache.data)
+  if (cache && cache.expireTime > Date.now()) {
+    setSuggestions(cache.data)
+    setLoading(false)
+  } else {
+    suggestionAPI
+      .get(keyword)
+      .then((res) => {
+        setSuggestions(res.data)
+        cacheRepository.set(keyword, res.data)
+      })
+      .catch(() => setError(true))
+      .finally(() => {
         setLoading(false)
-      } else {
-        suggestionAPI
-          .get(keyword)
-          .then((res) => {
-            setSuggestions(res.data)
-            cacheRepository.set(keyword, res.data)
-          })
-          .catch(() => setError(true))
-          .finally(() => {
-            setLoading(false)
-          })
-        }
-      } else {
-        setSuggestions([])
-      }
-    }, [keyword])
+      })
+    }
+  } else {
+    setSuggestions([])
+  }
+}, [keyword])
 ```
 
 ### 1-3. 검색창 컴포넌트 설계
@@ -164,49 +164,49 @@ const { suggestions, loading, error } = useSuggestions(debouncedValue)`
 
 - `suggestions.length === 0`의 참/거짓에 따라 `'최근 검색어 + 추천 검색어(default)' / '추천 검색어(suggestions)'`값을 출력해주었습니다.
 
-```
+```ts
 // src/components/search/SearchSuggestion.tsx
 
 {loading ? (
-        <S.SearchMainText>검색 중 ...</S.SearchMainText>
-      ) : error ? (
-        <S.SearchMainText>검색 에러 발생, 문의 부탁드립니다.</S.SearchMainText>
-      ) : (
+  <S.SearchMainText>검색 중 ...</S.SearchMainText>
+) : error ? (
+  <S.SearchMainText>검색 에러 발생, 문의 부탁드립니다.</S.SearchMainText>
+) : (
+  <>
+    <S.SearchRecentBox>
+      {suggestions.length === 0 ? (
         <>
-          <S.SearchRecentBox>
-            {suggestions.length === 0 ? (
-              <>
-                <S.SearchMainText>최근 검색어</S.SearchMainText>
-                <div>최근 검색어가 없습니다</div>
-              </>
-            ) : (
-              <S.SearchRecentItemList>
-                ...
-                <S.SearchMainText>추천 검색어</S.SearchMainText>
-                {suggestions.map((suggestion: SickObj, index) => {
-                  return (
-                    <S.SearchRecentItem
-                      key={suggestion.sickCd}
-                      $selectIndex={selectIndex === index + 1}
-                    >
-                      ...
-                    </S.SearchRecentItem>
-                  )
-                })}
-              </S.SearchRecentItemList>
-            )}
-          </S.SearchRecentBox>
-          {suggestions.length === 0 && (
-            <>
-              <S.SearchMainText>추천 검색어로 검색해보세요</S.SearchMainText>
-              <S.SearchSuggestionBox>
-                <S.SearchSuggestionItem>B형간염</S.SearchSuggestionItem>
-                ...
-              </S.SearchSuggestionBox>
-            </>
-          )}
+          <S.SearchMainText>최근 검색어</S.SearchMainText>
+          <div>최근 검색어가 없습니다</div>
+        </>
+        ) : (
+          <S.SearchRecentItemList>
+          ...
+          <S.SearchMainText>추천 검색어</S.SearchMainText>
+          {suggestions.map((suggestion: SickObj, index) => {
+            return (
+              <S.SearchRecentItem
+                key={suggestion.sickCd}
+                $selectIndex={selectIndex === index + 1}
+              >
+              ...
+              </S.SearchRecentItem>
+            )
+          })}
+          </S.SearchRecentItemList>
+        )}
+    </S.SearchRecentBox>
+      {suggestions.length === 0 && (
+        <>
+          <S.SearchMainText>추천 검색어로 검색해보세요</S.SearchMainText>
+          <S.SearchSuggestionBox>
+          <S.SearchSuggestionItem>B형간염</S.SearchSuggestionItem>
+            ...
+          </S.SearchSuggestionBox>
         </>
       )}
+  </>
+)}
 ```
 
 ## 2. API 호출 별 로컬 캐싱 구현
@@ -341,7 +341,7 @@ useDeferredValue를 사용한다면 UX 측면에서는 좋은 결과를 보였�
 
 api를 호출해 결과값(=suggestions)을 리턴해주는 `useSuggestions` 커스텀 훅을 제작하였습니다.
 
-```
+```ts
 // src/hooks/useSuggestions.ts
 
 const useSuggestions = (keyword: string) => {
@@ -373,7 +373,7 @@ const useSuggestions = (keyword: string) => {
 
 파라미터로 들어온 value를 일정 시간(=delay)이 지나면 다시 리턴시켜주는 `useDebounce` 커스텀 훅을 제작하였습니다.
 
-```
+```ts
 // src/hooks/useDebounce.ts
 
 const useDebounce = (value: string, delay: number) => {
@@ -393,7 +393,7 @@ const useDebounce = (value: string, delay: number) => {
 
 결과적으로 useSuggestions 훅에는 useDebounce 훅으로 delay 된 keyword가 들어가게 됩니다.
 
-```
+```ts
 // src/pages/MainPage.tsx
 
 const debouncedValue = useDebounce(keyword, DEBOUNCE_DELAY)
