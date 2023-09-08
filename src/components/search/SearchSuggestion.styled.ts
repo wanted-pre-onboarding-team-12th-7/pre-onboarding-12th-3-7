@@ -22,10 +22,10 @@ export const SearchRecentItemList = styled.ul`
   display: flex;
   flex-direction: column;
 `
-export const SearchRecentItem = styled.li<{ selectIndex: boolean }>`
+export const SearchRecentItem = styled.li<{ $selectIndex: boolean }>`
   padding: 8px 0;
-  background-color: ${({ theme, selectIndex }) =>
-    selectIndex ? theme.color.keyboardBg : theme.color.white};
+  background-color: ${({ theme, $selectIndex }) =>
+    $selectIndex ? theme.color.keyboardBg : theme.color.white};
   width: calc(100% + 60px);
   margin-left: -30px;
   padding-left: 30px;
