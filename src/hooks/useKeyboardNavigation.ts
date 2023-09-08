@@ -27,12 +27,14 @@ const useKeyboardNavigation = <T>(dataArr: T[]) => {
   }
 
   const changeIndexByKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'ArrowUp' || (e.shiftKey && e.key === 'Tab')) {
-      moveToPrev(e)
-    } else if (e.key === 'ArrowDown' || e.key === 'Tab') {
-      moveToNext(e)
-    } else if (e.key === 'Escape') {
-      closeAndReset()
+    if (!e.nativeEvent.isComposing) {
+      if (e.key === 'ArrowUp' || (e.shiftKey && e.key === 'Tab')) {
+        moveToPrev(e)
+      } else if (e.key === 'ArrowDown' || e.key === 'Tab') {
+        moveToNext(e)
+      } else if (e.key === 'Escape') {
+        closeAndReset()
+      }
     }
   }
 
